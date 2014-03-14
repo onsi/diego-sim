@@ -44,7 +44,7 @@ func startAndMonitorExecutor(index int, output *os.File, ready *sync.WaitGroup) 
 	cleanup.Register(func() {
 		shuttingDown = true
 		if cmd.Process != nil {
-			cmd.Process.Signal(os.Interrupt)
+			cmd.Process.Kill()
 		}
 	})
 
