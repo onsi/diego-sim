@@ -30,6 +30,12 @@ var currentMemory int
 var stop chan bool
 var tasks *sync.WaitGroup
 
+var RAND *rand.Rand
+
+func init() {
+	RAND = rand.New(rand.NewSource(time.Now().UnixNano()))
+}
+
 func main() {
 	flag.Parse()
 	cleanup.Register(func() {
@@ -266,7 +272,7 @@ func sleepForRunInterval() {
 }
 
 func sleepForARandomInterval(reason string, minSleepTime, maxSleepTime int) {
-	interval := rand.New(rand.NewSource(time.Now().UnixNano())).Intn(maxSleepTime-minSleepTime) + minSleepTime
+	interval := RAND.Intn(maxSleepTime-minSleepTime) + minSleepTime
 	logger.Info(reason, fmt.Sprintf("%dms", interval))
 	time.Sleep(time.Duration(interval) * time.Millisecond)
 }

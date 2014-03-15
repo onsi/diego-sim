@@ -14,6 +14,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"time"
 )
 
 var etcdNodes int
@@ -23,6 +24,7 @@ var executorMemory int
 var runOnceMemory int
 var outDir string
 var verbose bool
+var over time.Duration
 
 func init() {
 	flag.IntVar(&etcdNodes, "etcd-nodes", 1, "# of etcd nodes")
@@ -32,6 +34,7 @@ func init() {
 	flag.IntVar(&runOnceMemory, "run-once-memory", 100, "RunOnce required memory")
 	flag.StringVar(&outDir, "output-directory", "", "Output directory")
 	flag.BoolVar(&verbose, "v", false, "Verbose mode")
+	flag.DurationVar(&over, "over", 0, "Duration over which to emit the events")
 }
 
 var etcd *etcdstorerunner.ETCDClusterRunner
@@ -101,13 +104,14 @@ func main() {
 
 func writeInfo() {
 	data := fmt.Sprintf(`{
-    etcd-nodes:%d,
+    etcd_nodes:%d,
     executors:%d,
-    run-onces:%d,
-    executor-available-memory:%d,
-    run-once-memory:%d
+    run_onces:%d,
+    executor_available_memory:%d,
+    run_once_memory:%d,
+    over:%.4f
 }
-`, etcdNodes, nExecutors, nRunOnces, executorMemory, runOnceMemory)
+`, etcdNodes, nExecutors, nRunOnces, executorMemory, runOnceMemory, float64(over)/float64(time.Second))
 
 	logger.Info("simulator.running", data)
 

@@ -1,0 +1,28 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="./style/application.css">
+  <script src="./externals/head.js"></script>
+  <script src="./application.js"></script>
+</head>
+
+<body>
+  <div class="content">
+    <div id="info">
+    </div>
+    <div class="plots">
+      <canvas id='run-onces' width="800px" height="510px"></canvas>
+      <canvas id='executors' width="800px" height="510px"></canvas>
+      <canvas id='distribution' width="1600px" height="510px"></canvas>
+    </div>
+    <div class="time-slider">
+      <span id="time-value"></span>
+      <div class="time-controls">
+        <div id="time-button" class="play"></div>
+        <input id="time" type="range" min="0" max="45" step="1"></input>
+      </div>
+    </div>
+    <div id="logs">
+    </div>
+  </div>
+</body>
+</html>

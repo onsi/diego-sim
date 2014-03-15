@@ -15,6 +15,7 @@ import (
 
 type etcdData struct {
 	Time              float64        `json:"time"`
+	ReadTime          float64        `json:"read_time"`
 	Pending           int            `json:"pending"`
 	Claimed           int            `json:"claimed"`
 	Running           int            `json:"running"`
@@ -63,18 +64,20 @@ func monitorRunOnces(out io.Writer) {
 			if err != nil {
 				logger.Info("fetch.etcd.executorNode.error", err)
 			}
+			readTime := time.Since(t)
 
 			d := etcdData{
 				Time:              float64(time.Now().UnixNano()) / 1e9,
 				RunningByExecutor: map[string]int{},
 				PresentExecutors:  len(executorNode.ChildNodes),
+				ReadTime:          float64(readTime) / 1e9,
 			}
 			pending, ok := runOnceNodes.Lookup("pending")
 			if ok {
 				d.Pending = len(pending.ChildNodes)
 			}
 
-			claimed, ok := runOnceNodes.Lookup("pending")
+			claimed, ok := runOnceNodes.Lookup("claimed")
 			if ok {
 				d.Claimed = len(claimed.ChildNodes)
 			}

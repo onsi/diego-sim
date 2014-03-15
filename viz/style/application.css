@@ -1,0 +1,107 @@
+body {
+  -webkit-user-select:none;
+  font-family:sans-serif;
+  font-size:18px;
+  margin:0;
+}
+
+h1 {
+  font-size:20px;
+  margin:5px 0 5px 0;
+}
+
+h4 {
+  margin:8px 0 2px 0;
+}
+
+canvas {
+  float:left;
+}
+
+.content {
+  position:absolute; 
+  width:1900;
+  height:1060;
+  background-color:#eee;
+}
+
+.plots {
+  position:absolute;
+  top:40px;
+  bottom:0;
+  left:0;
+  width:1600px;
+}
+
+.time-slider {
+  position:absolute;
+  top:0px;
+  right:0;
+  width:280px;
+  height:40px;
+  text-align:center;
+  margin:10px 0;
+}
+
+.time-slider #time-value {
+  font-size: 20px;
+  font-weight:bold;
+}
+
+.time-slider .time-controls {
+  display:block;
+  width:280px;
+}
+
+.time-slider .time-controls #time-button {
+  display:inline-block;
+  width:20px;
+  height:20px;
+  cursor: pointer;
+}
+
+.time-slider .time-controls #time-button.play {
+  background-color: #0a0;
+}
+
+.time-slider .time-controls #time-button.stop {
+  background-color: #f00;
+}
+
+.time-slider .time-controls input[type="range"] {
+  width:200px;
+  margin:0;
+  height:20px;
+}
+
+#info {
+  text-align:left;
+  position:absolute;
+  line-height:40px;
+  top:0;
+  left:20px;
+  width:1580px;
+  height:40px
+  font-weight:bold;
+  font-size:24px;
+}
+
+#logs {
+  position:absolute;
+  top:40px;
+  width:300px;
+  bottom:0;
+  right:0;
+}
+
+#logs li {
+  list-style: none;
+  padding:10px;
+}
+
+#logs li:nth-child(even) {
+  background-color:#d0d0d0;
+}
+#logs li:nth-child(odd) {
+  background-color:#e0e0e0;
+}

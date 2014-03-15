@@ -43,6 +43,8 @@ func runSimulation() {
 func desireAllRunOnces() {
 	logger.Info("desiring.runonces", nRunOnces)
 
+	dt := over / time.Duration(nRunOnces)
+
 	allDesired := &sync.WaitGroup{}
 	for index := 1; index <= nRunOnces; index++ {
 		allDesired.Add(1)
@@ -61,6 +63,7 @@ func desireAllRunOnces() {
 			}
 			logger.Info("desired.runonce", innerIndex)
 		}()
+		time.Sleep(dt)
 	}
 	allDesired.Wait()
 	logger.Info("all.runonces.desired")
